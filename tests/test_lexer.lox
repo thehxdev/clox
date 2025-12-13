@@ -1,0 +1,19 @@
+*+-/(){};
+
+// This is a comment
+
+class ClassName {}
+
+fun functionName(a, b) { // another comment
+    var c = a + b; // some math
+    return c;
+}
+
+"a string literal"
+
+"This
+is a
+multi-line
+string!"
+
+var msg = "Hello, World!";
