@@ -5,13 +5,12 @@ log_and_run() {
     $@
 }
 
-GENERAL_CFALGS=(-std=c99 -Wall -Wextra)
+GENERAL_CFALGS=(-std=gnu11 -Wall -Wextra)
 DEBUG_CFLAGS=(-Og -g3 -fstack-protector)
 RELEASE_CFLAGS=(-march=native -O3 -DNDEBUG -s)
+CC="${CC:-cc}"
 
-if [ -z "$CC" ]; then
-    CC=cc
-elif [ "$CC" == "clang" ]; then
+if [ "$CC" == "clang" ]; then
     DEBUG_CFLAGS+=(-fsanitize=address,undefined)
     RELEASE_CFLAGS+=(-fuse-ld=lld -flto -fcf-protection=none -Wl,-O3)
 fi
