@@ -7,7 +7,7 @@
 #include <errno.h>
 #include <time.h>
 
-#include "base/base.c"
+#include "sth/sth.c"
 #include "io.c"
 #include "error.c"
 #include "lexer.c"

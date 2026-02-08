@@ -73,7 +73,7 @@ expr_t *parser_primary(void) {
 
 expr_t *parser_unary(void) {
     const int unary_matches[] = { TOKEN_BANG, TOKEN_MINUS, };
-    if (parser_match(unary_matches, STH_ARRAY_LEN(unary_matches))) {
+    if (parser_match(unary_matches, STH_BASE_ARRAY_LEN(unary_matches))) {
         token_t *operator = parser_previous();
         expr_t *right = parser_unary();
         expr_t *expr = sth_arena_alloc(parser.arena, sizeof(*expr));
@@ -92,7 +92,7 @@ expr_t *parser_unary(void) {
 expr_t *parser_factor(void) {
     const int matches[] = { TOKEN_SLASH, TOKEN_STAR, };
     expr_t *expr = parser_unary();
-    while (parser_match(matches, STH_ARRAY_LEN(matches))) {
+    while (parser_match(matches, STH_BASE_ARRAY_LEN(matches))) {
         token_t *operator = parser_previous();
         expr_t *right = parser_unary();
         expr_t *left = expr;
@@ -104,7 +104,7 @@ expr_t *parser_factor(void) {
 expr_t *parser_term(void) {
     const int matches[] = { TOKEN_MINUS, TOKEN_PLUS, };
     expr_t *expr = parser_factor();
-    while (parser_match(matches, STH_ARRAY_LEN(matches))) {
+    while (parser_match(matches, STH_BASE_ARRAY_LEN(matches))) {
         token_t *operator = parser_previous();
         expr_t *right = parser_factor();
         expr_t *left = expr;
@@ -121,7 +121,7 @@ expr_t *parser_comparison(void) {
         TOKEN_LESS_EQUAL,
     };
     expr_t *expr = parser_term();
-    while (parser_match(matches, STH_ARRAY_LEN(matches))) {
+    while (parser_match(matches, STH_BASE_ARRAY_LEN(matches))) {
         token_t *operator = parser_previous();
         expr_t *right = parser_term();
         expr_t *left = expr;
@@ -133,7 +133,7 @@ expr_t *parser_comparison(void) {
 expr_t *parser_equality(void) {
     const int matches[] = { TOKEN_BANG_EQUAL, TOKEN_EQUAL_EQUAL, };
     expr_t *expr = parser_comparison();
-    while (parser_match(matches, STH_ARRAY_LEN(matches))) {
+    while (parser_match(matches, STH_BASE_ARRAY_LEN(matches))) {
         token_t *operator = parser_previous();
         expr_t *right = parser_comparison();
         expr_t *left = expr;

@@ -1,5 +1,4 @@
 static sth_arena_t *arena = NULL;
-static const sth_arena_config_t arena_config = STH_ARENA_DEFAULT_CONFIG;
 
 static void usage(const char *program_name) {
     fprintf(stderr, "Usage: %s <script-file>\n", program_name);
@@ -10,10 +9,10 @@ int main(int argc, char *argv[]) {
     if (argc > 2) {
         usage(argv[0]);
     } else if (argc == 2) {
-        arena = sth_arena_new(&arena_config);
+        arena = sth_arena_new(STH_ARENA_DEFAULT_CONFIG());
         err = interpreter_run_file(arena, argv[1]);
     } else {
-        arena = sth_arena_new(&arena_config);
+        arena = sth_arena_new(STH_ARENA_DEFAULT_CONFIG());
         err = interpreter_run_prompt(arena);
     }
     if (arena) {
